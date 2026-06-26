@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 
 // Fixed particle positions — no Math.random() to avoid hydration mismatch
 // Desktop: 16 particles. Mobile: first 8 only (MOBILE_PARTICLE_COUNT).
@@ -222,22 +221,10 @@ export default function Preloader({ subtitle = 'Preparing Your Digital Experienc
               transition={{ duration: 0.55, delay: 0.20, ease: [0.22, 1, 0.36, 1] }}
               style={{ position: 'relative', zIndex: 1 }}
             >
-              <Image
+              <img
                 src="/logo.png"
                 alt="Taruna Technology"
-                width={210} height={74}
-                priority unoptimized
-                style={{
-                  width: '210px', height: 'auto', objectFit: 'contain',
-                  // drop-shadow filters are expensive on mobile — simplified
-                  filter: isMobile
-                    ? 'drop-shadow(0 0 14px rgba(232,121,249,0.45))'
-                    : [
-                        'drop-shadow(0 0 22px rgba(232,121,249,0.52))',
-                        'drop-shadow(0 0 8px rgba(168,85,247,0.42))',
-                        'drop-shadow(0 2px 12px rgba(0,0,0,0.60))',
-                      ].join(' '),
-                }}
+                className="w-[210px] h-auto object-contain drop-shadow-[0_0_14px_rgba(232,121,249,0.45)] md:drop-shadow-[0_0_22px_rgba(232,121,249,0.52)]"
               />
             </motion.div>
           </div>
