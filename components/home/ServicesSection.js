@@ -186,6 +186,16 @@ function ServiceCard({ service, index }) {
 export default function ServicesSection() {
   return (
     <section className="relative py-24 lg:py-32 bg-[#080818] overflow-hidden">
+      {/* Seamless Top Blend from Hero Section */}
+      <div
+        className="absolute top-0 inset-x-0 h-32 pointer-events-none"
+        style={{
+          zIndex: 2,
+          background: 'linear-gradient(to bottom, #080818 0%, rgba(8,8,24,0.8) 50%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       <GradientMesh />
       <div className="relative site-container" style={{ zIndex: 1 }}>
 

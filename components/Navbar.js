@@ -84,6 +84,8 @@ export default function Navbar() {
   const isActive = (href) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
 
+  const isEducationPage = pathname?.startsWith('/education') || pathname?.startsWith('/apply');
+
   return (
     <>
       {/* ── Main navbar ── */}
@@ -134,29 +136,44 @@ export default function Navbar() {
 
             {/* ── Desktop nav ── */}
             <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-              {navLinks.map((link) =>
-                link.isButton ? (
+              {navLinks.map((link) => (
+                <NavItem
+                  key={link.label}
+                  link={link}
+                  isActive={isActive(link.href)}
+                />
+              ))}
+
+              {/* Action buttons */}
+              <div className="flex items-center gap-2.5 ml-3">
+                {isEducationPage && (
                   <button
-                    key={link.label}
                     onClick={() => openEnrollmentModal()}
-                    className="relative ml-4 px-5 py-2.5 text-white text-sm font-bold rounded-xl tracking-wide overflow-hidden
-                      bg-gradient-to-r from-pink-600 to-purple-600
-                      hover:from-pink-500 hover:to-purple-500
+                    className="relative px-5 py-2.5 text-white text-sm font-bold rounded-xl tracking-wide overflow-hidden
+                      bg-gradient-to-r from-purple-600 to-indigo-600
+                      hover:from-purple-500 hover:to-indigo-500
                       hover:-translate-y-0.5
-                      hover:shadow-[0_4px_24px_rgba(232,121,249,0.45),0_0_0_1px_rgba(232,121,249,0.25)]
+                      hover:shadow-[0_4px_24px_rgba(168,85,247,0.45),0_0_0_1px_rgba(168,85,247,0.25)]
                       active:translate-y-0 transition-all duration-300 shadow-lg shadow-purple-900/30
-                      after:absolute after:inset-0 after:bg-gradient-to-t after:from-white/0 after:to-white/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300"
+                      after:absolute after:inset-0 after:bg-gradient-to-t after:from-white/0 after:to-white/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300 cursor-pointer"
                   >
-                    {link.label}
+                    Apply Now
                   </button>
-                ) : (
-                  <NavItem
-                    key={link.label}
-                    link={link}
-                    isActive={isActive(link.href)}
-                  />
-                )
-              )}
+                )}
+
+                <Link
+                  href="/contact"
+                  className="relative px-5 py-2.5 text-white text-sm font-bold rounded-xl tracking-wide overflow-hidden
+                    bg-gradient-to-r from-pink-600 to-purple-600
+                    hover:from-pink-500 hover:to-purple-500
+                    hover:-translate-y-0.5
+                    hover:shadow-[0_4px_24px_rgba(232,121,249,0.45),0_0_0_1px_rgba(232,121,249,0.25)]
+                    active:translate-y-0 transition-all duration-300 shadow-lg shadow-purple-900/30
+                    after:absolute after:inset-0 after:bg-gradient-to-t after:from-white/0 after:to-white/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300 flex items-center justify-center"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </nav>
 
             {/* ── Mobile hamburger ── */}
@@ -200,30 +217,49 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.045, duration: 0.2 }}
                   >
-                    {link.isButton ? (
-                      <button
-                        onClick={() => {
-                          openEnrollmentModal();
-                          setIsMobileOpen(false);
-                        }}
-                        className="block w-full text-center px-4 py-3 mt-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-sm font-bold rounded-xl tracking-wide hover:from-pink-500 hover:to-purple-500 transition-all duration-200"
-                      >
-                        {link.label}
-                      </button>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className={`inline-flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-150 ${
-                          isActive(link.href)
-                            ? 'text-pink-400 bg-pink-500/10 border border-pink-500/20'
-                            : 'text-gray-300 hover:text-white hover:bg-white/5'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    )}
+                    <Link
+                      href={link.href}
+                      className={`inline-flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-150 w-full ${
+                        isActive(link.href)
+                          ? 'text-pink-400 bg-pink-500/10 border border-pink-500/20'
+                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
                   </motion.div>
                 ))}
+
+                {/* Mobile action buttons */}
+                <div className="pt-2 space-y-2">
+                  {isEducationPage && (
+                    <motion.button
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      onClick={() => {
+                        openEnrollmentModal();
+                        setIsMobileOpen(false);
+                      }}
+                      className="block w-full text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-sm font-bold rounded-xl tracking-wide hover:from-purple-500 hover:to-indigo-500 transition-all duration-200 shadow-lg shadow-purple-900/30"
+                    >
+                      Apply Now
+                    </motion.button>
+                  )}
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: isEducationPage ? 0.05 : 0 }}
+                  >
+                    <Link
+                      href="/contact"
+                      onClick={() => setIsMobileOpen(false)}
+                      className="block w-full text-center px-4 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-sm font-bold rounded-xl tracking-wide hover:from-pink-500 hover:to-purple-500 transition-all duration-200 shadow-lg shadow-purple-900/30"
+                    >
+                      Contact Us
+                    </Link>
+                  </motion.div>
+                </div>
               </div>
 
               {/* Tagline */}

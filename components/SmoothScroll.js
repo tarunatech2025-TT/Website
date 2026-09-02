@@ -9,10 +9,14 @@ export default function SmoothScroll({ children }) {
 
   useEffect(() => {
     let lenis;
+    let rafId;
+    let isMounted = true;
     
     const initLenis = async () => {
       try {
         const Lenis = (await import('lenis')).default;
+        if (!isMounted) return;
+
         lenis = new Lenis({
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -26,16 +30,14 @@ export default function SmoothScroll({ children }) {
         });
 
         lenisRef.current = lenis;
-        // Expose on window so any component can stop/start scroll
-        // (e.g. modals call window.__lenis?.stop() to lock background scroll)
         window.__lenis = lenis;
 
         function raf(time) {
           lenis.raf(time);
-          requestAnimationFrame(raf);
+          rafId = requestAnimationFrame(raf);
         }
 
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
       } catch (e) {
         console.log('Lenis not available, using default scroll');
       }
@@ -44,6 +46,8 @@ export default function SmoothScroll({ children }) {
     initLenis();
 
     return () => {
+      isMounted = false;
+      if (rafId) cancelAnimationFrame(rafId);
       if (lenisRef.current) {
         lenisRef.current.destroy();
       }

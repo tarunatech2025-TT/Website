@@ -27,7 +27,7 @@ const quickLinks = [
   { label: 'Products',     href: '/products' },
   { label: 'Education',    href: '/education' },
   { label: 'Global Reach', href: '/global-reach' },
-  { label: 'Contact',      href: '/contact' },
+  { label: 'Contact Us',   href: '/contact' },
   { label: 'Apply Now',    href: '/apply-now', isButton: true },
 ];
 

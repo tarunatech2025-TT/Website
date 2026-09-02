@@ -44,7 +44,7 @@ export const metadata = {
     canonical: 'https://tarunatech.com',
   },
   openGraph: {
-    title: 'Best IT Company in Vadodara | ERP, CRM & Software Development | Taruna Technology',
+    title: 'Taruna Technology | Digital Transformation & Custom Software Solutions | ERP, CRM & Software Development',
     description:
       'Taruna Technology is a trusted IT Company in Vadodara — Custom ERP Software, CRM Solutions, Mobile App Development & IT Consulting. Serving businesses across Vadodara, Ahmedabad, Surat, Gujarat, India, USA, UK & UAE.',
     url: 'https://tarunatech.com',
@@ -59,7 +59,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Best IT Company in Vadodara | Taruna Technology',
+    title: 'Digital Transformation & Custom Software Solutions | Taruna Technology',
     description:
       'Custom ERP, CRM, Mobile App Development & IT Consulting from Vadodara. Serving Ahmedabad, Surat, Gujarat, India & globally.',
     images: ['/logo.png'],

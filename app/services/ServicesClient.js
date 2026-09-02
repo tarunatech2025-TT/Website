@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Code2, Smartphone, LayoutGrid, Users, TrendingUp,
-  Server, Globe, Layout, Database,
+  Server, Globe, Layout, Database, Search, Compass, Palette, Rocket,
+  Headphones, CheckCircle2, Sparkles, ChevronRight, Layers, Workflow,
 } from 'lucide-react';
 import { services } from '@/lib/data';
 import PremiumCard from '@/components/PremiumCard';
@@ -260,6 +262,419 @@ function ServicesDashboard() {
   );
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA: 6-Step 'How We Work' Process Workflow
+// ─────────────────────────────────────────────────────────────────────────────
+const WORKFLOW_STEPS = [
+  {
+    number: '01',
+    id: 'discover',
+    name: 'Discover',
+    title: 'Understand Your Business',
+    subtitle: 'Requirements • Workflow • Goals',
+    description:
+      'We dive deep into your operational processes, pain points, and commercial objectives to blueprint the optimal technology foundation.',
+    icon: Search,
+    color: 'from-purple-500 to-indigo-500',
+    accentColor: '#a855f7',
+    badge: 'Phase 01: Inception & Discovery',
+    pillars: [
+      {
+        title: 'Requirements Audit',
+        desc: 'Comprehensive study of business logic, stakeholder needs, and operational bottlenecks.',
+      },
+      {
+        title: 'Workflow Mapping',
+        desc: 'Diagramming user journeys, role permissions, approval flows, and data handoffs.',
+      },
+      {
+        title: 'Goal & KPI Alignment',
+        desc: 'Defining crystal-clear performance benchmarks, milestone dates, and ROI metrics.',
+      },
+    ],
+    deliverables: [
+      'Scope of Work & Requirements Document',
+      'Technical Feasibility Assessment',
+      'Strategic Project Roadmap',
+    ],
+  },
+  {
+    number: '02',
+    id: 'plan',
+    name: 'Plan',
+    title: 'Strategy & Architecture',
+    subtitle: 'Tech Stack • Roadmap • Milestones',
+    description:
+      'Architecting resilient database schemas, cloud infrastructure, and sprint breakdowns engineered for enterprise scale.',
+    icon: Compass,
+    color: 'from-blue-500 to-cyan-500',
+    accentColor: '#38bdf8',
+    badge: 'Phase 02: Architecture & Roadmap',
+    pillars: [
+      {
+        title: 'System Architecture',
+        desc: 'Selecting high-performance frameworks, database schemas, and microservice boundaries.',
+      },
+      {
+        title: 'Agile Sprint Planning',
+        desc: 'Iterative sprint cadence with transparent milestone tracking and deliverables.',
+      },
+      {
+        title: 'Security & Compliance',
+        desc: 'Role-based access control, data encryption protocols, and zero-trust safeguards.',
+      },
+    ],
+    deliverables: [
+      'System Architecture Blueprint',
+      'Database Schema & API Specifications',
+      'Sprint-by-Sprint Execution Schedule',
+    ],
+  },
+  {
+    number: '03',
+    id: 'design',
+    name: 'Design',
+    title: 'UI/UX & Interactive Prototypes',
+    subtitle: 'User Journeys • Wireframes • Design System',
+    description:
+      'Crafting high-converting, modern, and intuitive user experiences validated through interactive clickable prototypes.',
+    icon: Palette,
+    color: 'from-pink-500 to-rose-500',
+    accentColor: '#ec4899',
+    badge: 'Phase 03: Experience & Interface',
+    pillars: [
+      {
+        title: 'User Experience (UX)',
+        desc: 'Frictionless navigation patterns designed for high adoption and speed.',
+      },
+      {
+        title: 'High-Fidelity UI',
+        desc: 'Pixel-perfect responsive interfaces tailored with rich modern aesthetics.',
+      },
+      {
+        title: 'Component Design System',
+        desc: 'Reusable component libraries, design tokens, and comprehensive style guides.',
+      },
+    ],
+    deliverables: [
+      'Clickable Figma Prototype',
+      'Production-Ready UI Component Library',
+      'Complete User Flow Specs',
+    ],
+  },
+  {
+    number: '04',
+    id: 'develop',
+    name: 'Develop',
+    title: 'Scalable Clean-Code Build',
+    subtitle: 'Modern Frameworks • API Integrations • Security',
+    description:
+      'Building robust, modular software using modern tech stacks with continuous integration and clean code standards.',
+    icon: Code2,
+    color: 'from-emerald-500 to-teal-500',
+    accentColor: '#10b981',
+    badge: 'Phase 04: Engineering & Implementation',
+    pillars: [
+      {
+        title: 'Frontend & Mobile',
+        desc: 'High-performance React, Next.js, and mobile applications with 60fps fluidity.',
+      },
+      {
+        title: 'Backend & APIs',
+        desc: 'Scalable REST / GraphQL APIs, asynchronous event processing, and microservices.',
+      },
+      {
+        title: 'Database & Integrations',
+        desc: 'PostgreSQL, Redis caching, third-party ERP/CRM hooks, and webhooks.',
+      },
+    ],
+    deliverables: [
+      'Modular Clean-Code Repository',
+      'Comprehensive API Documentation',
+      'Live Staging Environment Access',
+    ],
+  },
+  {
+    number: '05',
+    id: 'test-launch',
+    name: 'Test & Launch',
+    title: 'Quality Assurance & Deployment',
+    subtitle: 'Stress Testing • Bug Fixes • Cloud Launch',
+    description:
+      'Exhaustive automated testing, load benchmarks, vulnerability checks, and zero-downtime production deployment.',
+    icon: Rocket,
+    color: 'from-amber-500 to-orange-500',
+    accentColor: '#f59e0b',
+    badge: 'Phase 05: Validation & Deployment',
+    pillars: [
+      {
+        title: 'Automated & Manual QA',
+        desc: 'Cross-browser testing, edge-case validation, and regression suites.',
+      },
+      {
+        title: 'Stress & Security Testing',
+        desc: 'Penetration tests, load-handling audits, and data protection verification.',
+      },
+      {
+        title: 'Production Go-Live',
+        desc: 'Automated CI/CD deployment, CDN caching setup, and DNS cutover.',
+      },
+    ],
+    deliverables: [
+      'QA Sign-Off & Test Audit Report',
+      'Cloud Infrastructure Setup',
+      'Live Production Release',
+    ],
+  },
+  {
+    number: '06',
+    id: 'support',
+    name: 'Support',
+    title: 'Continuous Evolution & SLA',
+    subtitle: '24/7 Monitoring • Feature Updates • Scaling',
+    description:
+      'Proactive monitoring, rapid SLA incident resolution, performance tuning, and ongoing feature updates to power long-term growth.',
+    icon: Headphones,
+    color: 'from-violet-500 to-purple-600',
+    accentColor: '#8b5cf6',
+    badge: 'Phase 06: Support & Growth',
+    pillars: [
+      {
+        title: '24/7 Uptime Monitoring',
+        desc: 'Real-time telemetry, server health alerts, and instant incident response.',
+      },
+      {
+        title: 'Performance & Optimization',
+        desc: 'Continuous query tuning, memory optimization, and security patches.',
+      },
+      {
+        title: 'Feature Enhancements',
+        desc: 'Agile feature additions based on user feedback and changing market needs.',
+      },
+    ],
+    deliverables: [
+      'Guaranteed SLA Coverage',
+      'Monthly Health & Analytics Reports',
+      'Dedicated Technical Support Desk',
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// COMPONENT: Interactive 'How We Work' Process Section
+// ─────────────────────────────────────────────────────────────────────────────
+function HowWeWorkSection() {
+  const [activeStep, setActiveStep] = useState(0);
+  const current = WORKFLOW_STEPS[activeStep];
+  const StepIcon = current.icon;
+
+  return (
+    <section className="relative py-24 bg-[#080818] overflow-hidden">
+      {/* Background glowing blooms */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[140px] opacity-20"
+          style={{ background: `radial-gradient(circle, ${current.accentColor} 0%, transparent 70%)` }}
+        />
+        <div className="absolute inset-0 dot-bg opacity-[0.04]" />
+      </div>
+
+      <div className="relative site-container" style={{ zIndex: 10 }}>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-bold tracking-[0.25em] uppercase mb-4 text-purple-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+            HOW WE WORK
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight leading-[1.12]">
+            From Idea to Impact,
+            <br />
+            <span className="text-gradient">We Build With You</span>
+          </h2>
+
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+            Our proven process combines business understanding, design, technology and continuous
+            support to create solutions that grow with your business.
+          </p>
+        </motion.div>
+
+        {/* ── Interactive 6-Step Horizontal Tabs ── */}
+        <div className="mb-10">
+          <div className="flex items-center justify-start lg:justify-between gap-2.5 sm:gap-3 overflow-x-auto pb-4 pt-1 px-1 no-scrollbar select-none">
+            {WORKFLOW_STEPS.map((step, idx) => {
+              const isActive = activeStep === idx;
+              const IconComponent = step.icon;
+
+              return (
+                <button
+                  key={step.id}
+                  onClick={() => setActiveStep(idx)}
+                  className={`group relative flex-shrink-0 flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? 'text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-lg shadow-purple-900/40 ring-1 ring-white/25 scale-[1.02]'
+                      : 'text-gray-400 bg-[#0e0e24]/80 hover:bg-[#151536] hover:text-white border border-white/8 hover:border-purple-500/30'
+                  }`}
+                >
+                  <span
+                    className={`font-mono text-xs px-2 py-0.5 rounded-md transition-colors ${
+                      isActive
+                        ? 'bg-white/20 text-white'
+                        : 'bg-white/5 text-purple-300/80 group-hover:text-purple-200'
+                    }`}
+                  >
+                    {step.number}
+                  </span>
+                  <span className="tracking-wide">{step.name}</span>
+
+                  {/* Active down-pointer indicator arrow */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeStepArrow"
+                      className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[7px] border-x-transparent border-t-[8px] border-t-pink-600"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── Detailed Active Step Showcase Card ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current.id}
+            initial={{ opacity: 0, y: 20, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.985 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-3xl overflow-hidden backdrop-blur-2xl border border-purple-500/25 p-7 sm:p-10 lg:p-12 shadow-2xl"
+            style={{
+              background: 'linear-gradient(145deg, rgba(20,20,48,0.75) 0%, rgba(10,10,28,0.92) 100%)',
+              boxShadow: `0 0 0 1px rgba(168,85,247,0.12), 0 20px 60px -15px rgba(0,0,0,0.7), 0 0 50px -10px ${current.accentColor}25`,
+            }}
+          >
+            {/* Subtle top card glow line */}
+            <div
+              className="absolute top-0 left-0 right-0 h-[2px]"
+              style={{
+                background: `linear-gradient(90deg, transparent 0%, ${current.accentColor} 50%, transparent 100%)`,
+              }}
+            />
+
+            {/* Top row: Badge & Step counter */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${current.color} flex items-center justify-center shadow-lg`}
+                >
+                  <StepIcon size={24} className="text-white" />
+                </div>
+                <div>
+                  <div className="text-xs font-mono font-bold tracking-wider uppercase text-purple-300/80">
+                    {current.badge}
+                  </div>
+                  <div className="text-sm font-semibold text-gray-400">
+                    Step {current.number} of 06
+                  </div>
+                </div>
+              </div>
+
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-300">
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: current.accentColor }} />
+                {current.subtitle}
+              </div>
+            </div>
+
+            {/* Step Heading & Description */}
+            <div className="max-w-3xl mb-10">
+              <div className="flex items-baseline gap-3 mb-2">
+                <span
+                  className="text-2xl sm:text-3xl font-black font-mono tracking-tight"
+                  style={{ color: current.accentColor }}
+                >
+                  {current.number}
+                </span>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                  {current.title}
+                </h3>
+              </div>
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+                {current.description}
+              </p>
+            </div>
+
+            {/* 3 Focus Pillar Cards */}
+            <div className="mb-10">
+              <div className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 flex items-center gap-2 font-mono">
+                <Layers size={14} className="text-purple-400" />
+                Key Focus Pillars
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                {current.pillars.map((pillar, i) => (
+                  <div
+                    key={pillar.title}
+                    className="group relative p-5 rounded-2xl bg-[#121230]/70 border border-white/8 hover:border-purple-500/30 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <span className="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-300 font-mono text-xs font-bold flex items-center justify-center border border-purple-500/30">
+                        {i + 1}
+                      </span>
+                      <h4 className="text-white font-bold text-sm tracking-wide">
+                        {pillar.title}
+                      </h4>
+                    </div>
+                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Key Deliverables Footer */}
+            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+              <div className="flex-1">
+                <div className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400 mb-3 font-mono flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-emerald-400" />
+                  Key Deliverables
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {current.deliverables.map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/25 text-xs font-medium text-purple-200"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs sm:text-sm transition-all duration-200 shadow-lg shadow-purple-900/30 hover:-translate-y-0.5 flex-shrink-0"
+              >
+                <span>Discuss This Phase</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-[#080818]">
@@ -450,6 +865,11 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════
+          HOW WE WORK — 6-Step Interactive Workflow
+      ══════════════════════════════════════════════════ */}
+      <HowWeWorkSection />
 
       {/* ══════════════════════════════════════════════════
           CTA

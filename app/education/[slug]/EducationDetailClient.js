@@ -813,7 +813,7 @@ function CourseIllustration({ slug, accent }) {
         </div>
         {/* Mini bar chart */}
         <div className="space-y-2 pt-2">
-          <p className="text-gray-600 text-[10px] font-mono">// performance metrics</p>
+          <p className="text-gray-600 text-[10px] font-mono">{'// performance metrics'}</p>
           {[85, 72, 91, 68].map((v, i) => (
             <div key={i} className="flex items-center gap-2">
               <div className="w-16 text-[10px] text-gray-600 font-mono">metric_{i + 1}</div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
-import { X, CheckCircle2, Sparkles, Zap } from 'lucide-react';
+import { X, CheckCircle2 } from 'lucide-react';
 
 const SERVICES = [
   'Web Development', 'Mobile App Development', 'AI Solutions',
@@ -379,23 +379,6 @@ function Field({ label, children }) {
 function Header({ isMobile }) {
   return (
     <div className={isMobile ? 'mb-0' : 'mb-7'}>
-      <div className="flex items-center gap-2 mb-3">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold"
-          style={{
-            background: 'linear-gradient(135deg, rgba(236,72,153,0.16), rgba(168,85,247,0.16))',
-            border: '1px solid rgba(236,72,153,0.32)', color: '#f9a8d4',
-            boxShadow: '0 0 14px rgba(236,72,153,0.14)',
-          }}>
-          <Sparkles size={11} />
-          Consultation
-        </span>
-        <motion.div
-          animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          style={{ color: 'rgba(168,85,247,0.70)' }}>
-          <Zap size={14} />
-        </motion.div>
-      </div>
       <h2 className={`font-black leading-tight mb-1.5 ${isMobile ? 'text-xl' : 'text-[1.40rem] mb-2'}`}>
         <span className="text-white">Schedule an </span>
         <span style={{

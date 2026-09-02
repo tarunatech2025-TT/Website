@@ -496,7 +496,7 @@ const TERMS_SECTIONS = [
     content: (
       <>
         <p className="text-gray-300 text-sm leading-relaxed">
-          Our website and services are provided on an "as is" and "as available" basis.
+          Our website and services are provided on an &quot;as is&quot; and &quot;as available&quot; basis.
           Taruna Technology makes no warranties, express or implied, regarding the accuracy,
           reliability, or completeness of any content or services.
         </p>

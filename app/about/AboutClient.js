@@ -87,7 +87,7 @@ export default function AboutPage() {
               {/* Floating achievement badges */}
               <div className="flex flex-wrap gap-3 mb-8">
                 {[
-                  { icon: '🏆', label: 'Best IT Company — Vadodara' },
+                  { icon: '🏆', label: 'Digital Transformation & Custom Software Solutions' },
                   { icon: '🌍', label: '6+ Countries Served' },
                   { icon: '⚡', label: 'Decades of Expertise' },
                 ].map((badge) => (
@@ -158,7 +158,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-xs font-bold tracking-[0.25em] uppercase mb-4" style={{ color: '#FFD54A' }}>BEST IT COMPANY IN VADODARA</p>
+            <p className="text-xs font-bold tracking-[0.25em] uppercase mb-4" style={{ color: '#FFD54A' }}>DIGITAL TRANSFORMATION & CUSTOM SOFTWARE SOLUTIONS</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
               Innovating the Future with
               <br />
@@ -174,7 +174,7 @@ export default function AboutPage() {
             {/* Trust indicators row */}
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {[
-                { icon: Award, label: 'Best IT Company', color: 'text-yellow-400' },
+                { icon: Award, label: 'Digital Transformation & Software Solutions', color: 'text-yellow-400' },
                 { icon: TrendingUp, label: '1250+ Clients', color: 'text-green-400' },
                 { icon: Globe, label: '6+ Countries', color: 'text-blue-400' },
                 { icon: Zap, label: 'Decades of Expertise', color: 'text-purple-400' },
@@ -308,7 +308,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 pointer-events-none" />
             <div className="relative">
               <h2 className="text-3xl font-black text-white mb-4">
-                Looking For Best IT Business Solution
+                Ready to Build Something Better
               </h2>
               <p className="text-gray-400 mb-8 max-w-xl mx-auto">
                 Get in touch with our team and let&apos;s discuss how we can help your business grow.

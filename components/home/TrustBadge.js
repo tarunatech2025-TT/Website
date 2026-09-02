@@ -30,7 +30,7 @@ const BADGE_STYLES = `
   /* lg→xl shrink to 140px, adjust offset */
   @media (min-width: 1024px) and (max-width: 1279px) {
     .tb-size-d          { width: 140px !important; height: 140px !important; }
-    .tb-desktop-pos     { bottom: -70px !important; }
+    .tb-desktop-pos     { bottom: 145px !important; }
   }
 
   /* Mobile base 130px */
@@ -39,7 +39,7 @@ const BADGE_STYLES = `
   /* Tablet 640-1023px → 150px, adjust offset */
   @media (min-width: 640px) and (max-width: 1023px) {
     .tb-size-m          { width: 150px !important; height: 150px !important; }
-    .tb-mobile-pos      { bottom: -75px !important; }
+    .tb-mobile-pos      { bottom: 135px !important; }
   }
 `;
 
@@ -85,16 +85,6 @@ function BadgeSVG({ spinClass, pathId }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  MOBILE BADGE  (visible only < 1024px)
-//
-//  • Absolute, inside the outer HeroSection wrapper (outside overflow:hidden).
-//  • Centered horizontally: left-0 right-0 + flex justify-center via classes.
-//  • bottom: -65px  →  badge center sits on hero/services seam (130px / 2).
-//  • CRITICAL: NO inline display style — Tailwind lg:hidden controls display.
-//    An inline display:flex would override lg:hidden (display:none) and cause
-//    the badge to appear on desktop regardless of the breakpoint class.
-// ─────────────────────────────────────────────────────────────────────────────
 export function TrustBadgeMobile() {
   return (
     <>
@@ -102,9 +92,8 @@ export function TrustBadgeMobile() {
       <div
         className="tb-mobile-pos lg:hidden absolute left-0 right-0 flex justify-center pointer-events-none select-none"
         style={{
-          bottom: '-65px',
-          zIndex: 20,
-          /* NO display property here — Tailwind lg:hidden owns it */
+          bottom: '130px',
+          zIndex: 50,
         }}
         aria-hidden="true"
       >
@@ -126,14 +115,6 @@ export function TrustBadgeMobile() {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  DESKTOP BADGE  (visible only ≥ 1024px)
-//
-//  • Absolute, inside the outer HeroSection wrapper (outside overflow:hidden).
-//  • right: 35px  = original horizontal position.
-//  • bottom: -85px = half of 170px → badge center sits on hero/services seam.
-//  • CRITICAL: NO inline display style — Tailwind hidden lg:block controls it.
-// ─────────────────────────────────────────────────────────────────────────────
 export function TrustBadgeDesktop() {
   return (
     <>
@@ -142,9 +123,8 @@ export function TrustBadgeDesktop() {
         className="tb-desktop-pos hidden lg:block absolute pointer-events-none select-none"
         style={{
           right:  '35px',
-          bottom: '-85px',
-          zIndex: 20,
-          /* NO display property here — Tailwind hidden lg:block owns it */
+          bottom: '165px',
+          zIndex: 50,
         }}
         aria-hidden="true"
       >
@@ -152,7 +132,7 @@ export function TrustBadgeDesktop() {
           className="tb-size-d"
           style={{
             borderRadius: '50%',
-            boxShadow: '0 0 40px rgba(246,232,55,0.28), 0 15px 40px rgba(0,0,0,0.35)',
+            boxShadow: '0 0 40px rgba(246,232,55,0.35), 0 10px 30px rgba(0,0,0,0.50)',
           }}
         >
           <BadgeSVG spinClass="tb-spin-d" pathId="tb-ring-path-d" />

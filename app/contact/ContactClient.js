@@ -8,7 +8,7 @@ import { companyInfo, services } from '@/lib/data';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending]     = useState(false);
+  const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' });
 
@@ -22,11 +22,11 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           formType: 'contact',
-          name:     form.name,
-          email:    form.email,
-          phone:    form.phone,
-          service:  form.service || '',
-          message:  form.message,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          service: form.service || '',
+          message: form.message,
         }),
       });
       const data = await res.json();
@@ -61,11 +61,11 @@ export default function ContactPage() {
             viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <radialGradient id="ch-hub" cx="50%" cy="50%" r="50%">
-                <stop offset="0%"   stopColor="rgba(168,85,247,0.22)" />
+                <stop offset="0%" stopColor="rgba(168,85,247,0.22)" />
                 <stop offset="100%" stopColor="rgba(139,92,246,0)" />
               </radialGradient>
               <radialGradient id="ch-core" cx="50%" cy="50%" r="50%">
-                <stop offset="0%"   stopColor="rgba(232,121,249,0.90)" />
+                <stop offset="0%" stopColor="rgba(232,121,249,0.90)" />
                 <stop offset="100%" stopColor="rgba(168,85,247,0.40)" />
               </radialGradient>
               <linearGradient id="ch-r1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -80,84 +80,84 @@ export default function ContactPage() {
                 <stop offset="0%" stopColor="rgba(236,72,153,0.65)" />
                 <stop offset="100%" stopColor="rgba(236,72,153,0)" />
               </linearGradient>
-              <filter id="ch-gs"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <filter id="ch-gl"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="ch-gs"><feGaussianBlur stdDeviation="2" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+              <filter id="ch-gl"><feGaussianBlur stdDeviation="5" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
             </defs>
             {/* Ambient glow */}
             <circle cx="300" cy="300" r="260" fill="url(#ch-hub)" />
             {/* Rotating dashed rings */}
-            {[80,130,185,245].map((r,i) => (
+            {[80, 130, 185, 245].map((r, i) => (
               <circle key={i} cx="300" cy="300" r={r} stroke="rgba(168,85,247,0.12)" strokeWidth="0.7" fill="none" strokeDasharray="6 10">
-                <animateTransform attributeName="transform" type="rotate" from={`0 300 300`} to={`${i%2===0?360:-360} 300 300`} dur={`${18+i*6}s`} repeatCount="indefinite"/>
+                <animateTransform attributeName="transform" type="rotate" from={`0 300 300`} to={`${i % 2 === 0 ? 360 : -360} 300 300`} dur={`${18 + i * 6}s`} repeatCount="indefinite" />
               </circle>
             ))}
             {/* Hexagonal hub */}
             <polygon points="300,240 352,270 352,330 300,360 248,330 248,270" stroke="rgba(168,85,247,0.55)" strokeWidth="1.2" fill="rgba(168,85,247,0.06)" filter="url(#ch-gs)">
-              <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
             </polygon>
-            <polygon points="300,258 334,276 334,312 300,330 266,312 266,276" stroke="rgba(232,121,249,0.40)" strokeWidth="0.8" fill="rgba(232,121,249,0.04)"/>
+            <polygon points="300,258 334,276 334,312 300,330 266,312 266,276" stroke="rgba(232,121,249,0.40)" strokeWidth="0.8" fill="rgba(232,121,249,0.04)" />
             {/* Core pulse */}
             <circle cx="300" cy="300" r="18" fill="url(#ch-core)" filter="url(#ch-gl)">
-              <animate attributeName="r" values="16;20;16" dur="2.4s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="16;20;16" dur="2.4s" repeatCount="indefinite" />
             </circle>
-            <circle cx="300" cy="300" r="8" fill="rgba(255,255,255,0.90)" filter="url(#ch-gs)"/>
+            <circle cx="300" cy="300" r="8" fill="rgba(255,255,255,0.90)" filter="url(#ch-gs)" />
             {/* 8 transmission rays */}
-            {[0,45,90,135,180,225,270,315].map((angle,i) => {
-              const rad=(angle*Math.PI)/180;
-              const x2=+(300+Math.cos(rad)*240).toFixed(2), y2=+(300+Math.sin(rad)*240).toFixed(2);
-              const ids=['ch-r1','ch-r2','ch-r3','ch-r1','ch-r2','ch-r3','ch-r1','ch-r2'];
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              const x2 = +(300 + Math.cos(rad) * 240).toFixed(2), y2 = +(300 + Math.sin(rad) * 240).toFixed(2);
+              const ids = ['ch-r1', 'ch-r2', 'ch-r3', 'ch-r1', 'ch-r2', 'ch-r3', 'ch-r1', 'ch-r2'];
               return <line key={i} x1="300" y1="300" x2={x2} y2={y2} stroke={`url(#${ids[i]})`} strokeWidth="0.7" opacity="0.5">
-                <animate attributeName="opacity" values="0.2;0.6;0.2" dur={`${2.5+i*0.3}s`} begin={`${i*0.2}s`} repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.2;0.6;0.2" dur={`${2.5 + i * 0.3}s`} begin={`${i * 0.2}s`} repeatCount="indefinite" />
               </line>;
             })}
             {/* Floating data packets */}
             {[
-              {angle:30, dist:120, color:'rgba(232,121,249,1)', r:3.5, dur:'3.0s', delay:'0s'},
-              {angle:110,dist:160, color:'rgba(34,211,238,1)',  r:3.0, dur:'3.8s', delay:'0.8s'},
-              {angle:200,dist:140, color:'rgba(168,85,247,1)',  r:2.5, dur:'4.2s', delay:'1.5s'},
-              {angle:290,dist:180, color:'rgba(244,114,182,1)', r:3.0, dur:'3.5s', delay:'0.4s'},
-              {angle:60, dist:200, color:'rgba(34,211,238,1)',  r:2.0, dur:'5.0s', delay:'2.0s'},
-              {angle:160,dist:100, color:'rgba(192,132,252,1)', r:2.5, dur:'2.8s', delay:'1.2s'},
-            ].map((p,i) => {
-              const rad=(p.angle*Math.PI)/180;
-              const cx=+(300+Math.cos(rad)*p.dist).toFixed(2), cy=+(300+Math.sin(rad)*p.dist).toFixed(2);
-              const dx=+(Math.cos(rad)*p.dist).toFixed(2), dy=+(Math.sin(rad)*p.dist).toFixed(2);
-              const path=`M0,0 L${dx},${dy}`;
+              { angle: 30, dist: 120, color: 'rgba(232,121,249,1)', r: 3.5, dur: '3.0s', delay: '0s' },
+              { angle: 110, dist: 160, color: 'rgba(34,211,238,1)', r: 3.0, dur: '3.8s', delay: '0.8s' },
+              { angle: 200, dist: 140, color: 'rgba(168,85,247,1)', r: 2.5, dur: '4.2s', delay: '1.5s' },
+              { angle: 290, dist: 180, color: 'rgba(244,114,182,1)', r: 3.0, dur: '3.5s', delay: '0.4s' },
+              { angle: 60, dist: 200, color: 'rgba(34,211,238,1)', r: 2.0, dur: '5.0s', delay: '2.0s' },
+              { angle: 160, dist: 100, color: 'rgba(192,132,252,1)', r: 2.5, dur: '2.8s', delay: '1.2s' },
+            ].map((p, i) => {
+              const rad = (p.angle * Math.PI) / 180;
+              const cx = +(300 + Math.cos(rad) * p.dist).toFixed(2), cy = +(300 + Math.sin(rad) * p.dist).toFixed(2);
+              const dx = +(Math.cos(rad) * p.dist).toFixed(2), dy = +(Math.sin(rad) * p.dist).toFixed(2);
+              const path = `M0,0 L${dx},${dy}`;
               return <g key={i}>
                 <circle cx={cx} cy={cy} r={p.r} fill={p.color} filter="url(#ch-gs)">
-                  <animate attributeName="opacity" values="0;1;1;0" dur={p.dur} begin={p.delay} repeatCount="indefinite"/>
-                  <animateMotion path={path} dur={p.dur} begin={p.delay} repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0;1;1;0" dur={p.dur} begin={p.delay} repeatCount="indefinite" />
+                  <animateMotion path={path} dur={p.dur} begin={p.delay} repeatCount="indefinite" />
                 </circle>
-                <circle cx={cx} cy={cy} r={p.r*2.2} fill="none" stroke={p.color} strokeWidth="0.5" opacity="0">
-                  <animate attributeName="opacity" values="0;0.4;0" dur={p.dur} begin={p.delay} repeatCount="indefinite"/>
-                  <animateMotion path={path} dur={p.dur} begin={p.delay} repeatCount="indefinite"/>
+                <circle cx={cx} cy={cy} r={p.r * 2.2} fill="none" stroke={p.color} strokeWidth="0.5" opacity="0">
+                  <animate attributeName="opacity" values="0;0.4;0" dur={p.dur} begin={p.delay} repeatCount="indefinite" />
+                  <animateMotion path={path} dur={p.dur} begin={p.delay} repeatCount="indefinite" />
                 </circle>
               </g>;
             })}
             {/* 6 satellite nodes */}
-            {[0,60,120,180,240,300].map((angle,i) => {
-              const rad=(angle*Math.PI)/180;
-              const cx=+(300+Math.cos(rad)*200).toFixed(2), cy=+(300+Math.sin(rad)*200).toFixed(2);
-              const c=['rgba(232,121,249,1)','rgba(34,211,238,1)','rgba(168,85,247,1)','rgba(244,114,182,1)','rgba(34,211,238,1)','rgba(192,132,252,1)'][i];
+            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              const cx = +(300 + Math.cos(rad) * 200).toFixed(2), cy = +(300 + Math.sin(rad) * 200).toFixed(2);
+              const c = ['rgba(232,121,249,1)', 'rgba(34,211,238,1)', 'rgba(168,85,247,1)', 'rgba(244,114,182,1)', 'rgba(34,211,238,1)', 'rgba(192,132,252,1)'][i];
               return <g key={i}>
                 <circle cx={cx} cy={cy} r="10" fill="rgba(168,85,247,0.08)" stroke={c} strokeWidth="0.8" opacity="0.7">
-                  <animate attributeName="opacity" values="0.5;0.9;0.5" dur={`${2.8+i*0.4}s`} begin={`${i*0.3}s`} repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.5;0.9;0.5" dur={`${2.8 + i * 0.4}s`} begin={`${i * 0.3}s`} repeatCount="indefinite" />
                 </circle>
                 <circle cx={cx} cy={cy} r="4" fill={c} filter="url(#ch-gs)">
-                  <animate attributeName="r" values="3;5;3" dur={`${2.8+i*0.4}s`} begin={`${i*0.3}s`} repeatCount="indefinite"/>
+                  <animate attributeName="r" values="3;5;3" dur={`${2.8 + i * 0.4}s`} begin={`${i * 0.3}s`} repeatCount="indefinite" />
                 </circle>
                 <circle cx={cx} cy={cy} r="14" fill="none" stroke={c} strokeWidth="0.5" opacity="0">
-                  <animate attributeName="r" values="10;22;10" dur={`${3.5+i*0.3}s`} begin={`${i*0.5}s`} repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="0.5;0;0.5" dur={`${3.5+i*0.3}s`} begin={`${i*0.5}s`} repeatCount="indefinite"/>
+                  <animate attributeName="r" values="10;22;10" dur={`${3.5 + i * 0.3}s`} begin={`${i * 0.5}s`} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.5;0;0.5" dur={`${3.5 + i * 0.3}s`} begin={`${i * 0.5}s`} repeatCount="indefinite" />
                 </circle>
               </g>;
             })}
             {/* Particle wave — bottom */}
-            {Array.from({length:18}).map((_,i) => {
-              const x=60+i*27, baseY=520, amp=18;
+            {Array.from({ length: 18 }).map((_, i) => {
+              const x = 60 + i * 27, baseY = 520, amp = 18;
               return <circle key={i} cx={x} cy={baseY} r="1.5" fill="rgba(168,85,247,0.55)" opacity="0.6">
-                <animate attributeName="cy" values={`${baseY};${baseY-amp};${baseY}`} dur={`${1.8+(i%4)*0.3}s`} begin={`${(i*0.08).toFixed(2)}s`} repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${1.8+(i%4)*0.3}s`} begin={`${(i*0.08).toFixed(2)}s`} repeatCount="indefinite"/>
+                <animate attributeName="cy" values={`${baseY};${baseY - amp};${baseY}`} dur={`${1.8 + (i % 4) * 0.3}s`} begin={`${(i * 0.08).toFixed(2)}s`} repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${1.8 + (i % 4) * 0.3}s`} begin={`${(i * 0.08).toFixed(2)}s`} repeatCount="indefinite" />
               </circle>;
             })}
           </svg>
@@ -188,10 +188,10 @@ export default function ContactPage() {
         {/* ── Layer 3: Foreground accent nodes ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 4 }} aria-hidden="true">
           {[
-            { top: '14%', left: '5%',  size: 8, color: 'rgba(244,114,182,0.55)', dur: '3.2s', delay: '0s'   },
-            { top: '64%', left: '9%',  size: 6, color: 'rgba(192,132,252,0.50)', dur: '2.8s', delay: '0.7s' },
-            { top: '44%', left: '2%',  size: 5, color: 'rgba(34,211,238,0.42)',  dur: '3.8s', delay: '1.0s' },
-            { top: '82%', left: '22%', size: 4, color: 'rgba(168,85,247,0.38)',  dur: '4.0s', delay: '0.4s' },
+            { top: '14%', left: '5%', size: 8, color: 'rgba(244,114,182,0.55)', dur: '3.2s', delay: '0s' },
+            { top: '64%', left: '9%', size: 6, color: 'rgba(192,132,252,0.50)', dur: '2.8s', delay: '0.7s' },
+            { top: '44%', left: '2%', size: 5, color: 'rgba(34,211,238,0.42)', dur: '3.8s', delay: '1.0s' },
+            { top: '82%', left: '22%', size: 4, color: 'rgba(168,85,247,0.38)', dur: '4.0s', delay: '0.4s' },
           ].map((n, i) => (
             <div key={i} className="absolute rounded-full"
               style={{
@@ -256,9 +256,9 @@ export default function ContactPage() {
                   className="flex flex-wrap gap-2.5"
                 >
                   {[
-                    { icon: '⚡', label: 'Response in 2–4 hrs',  glow: 'rgba(251,191,36,0.20)'  },
-                    { icon: '🌍', label: 'Available Worldwide',   glow: 'rgba(34,211,238,0.18)'  },
-                    { icon: '🔒', label: 'Confidential & Secure', glow: 'rgba(168,85,247,0.18)'  },
+                    { icon: '⚡', label: 'Response in 2–4 hrs', glow: 'rgba(251,191,36,0.20)' },
+                    { icon: '🌍', label: 'Available Worldwide', glow: 'rgba(34,211,238,0.18)' },
+                    { icon: '🔒', label: 'Confidential & Secure', glow: 'rgba(168,85,247,0.18)' },
                   ].map((t) => (
                     <span
                       key={t.label}
@@ -282,10 +282,10 @@ export default function ContactPage() {
               {/* RIGHT — stat cards */}
               <div className="hidden lg:grid grid-cols-2 gap-4">
                 {[
-                  { value: '1250+', label: 'Clients Served',     icon: '🌟', bg: 'rgba(168,85,247,0.12)',  border: 'rgba(168,85,247,0.30)', glow: 'rgba(168,85,247,0.40)', delay: 0.32 },
-                  { value: '35+',   label: 'Countries Reached',  icon: '🌍', bg: 'rgba(34,211,238,0.10)',  border: 'rgba(34,211,238,0.26)', glow: 'rgba(34,211,238,0.38)', delay: 0.42 },
-                  { value: '870+',  label: 'Projects Delivered', icon: '📦', bg: 'rgba(236,72,153,0.10)',  border: 'rgba(236,72,153,0.26)', glow: 'rgba(236,72,153,0.38)', delay: 0.52 },
-                  { value: '2–4h',  label: 'Avg. Response Time', icon: '⚡', bg: 'rgba(251,191,36,0.08)',  border: 'rgba(251,191,36,0.22)', glow: 'rgba(251,191,36,0.35)', delay: 0.62 },
+                  { value: '1250+', label: 'Clients Served', icon: '🌟', bg: 'rgba(168,85,247,0.12)', border: 'rgba(168,85,247,0.30)', glow: 'rgba(168,85,247,0.40)', delay: 0.32 },
+                  { value: '35+', label: 'Countries Reached', icon: '🌍', bg: 'rgba(34,211,238,0.10)', border: 'rgba(34,211,238,0.26)', glow: 'rgba(34,211,238,0.38)', delay: 0.42 },
+                  { value: '870+', label: 'Projects Delivered', icon: '📦', bg: 'rgba(236,72,153,0.10)', border: 'rgba(236,72,153,0.26)', glow: 'rgba(236,72,153,0.38)', delay: 0.52 },
+                  { value: '2–4h', label: 'Avg. Response Time', icon: '⚡', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.22)', glow: 'rgba(251,191,36,0.35)', delay: 0.62 },
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}
@@ -604,7 +604,7 @@ export default function ContactPage() {
                   style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.30), rgba(236,72,153,0.18))', border: '1px solid rgba(168,85,247,0.30)' }}
                 >
                   <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="rgba(216,180,254,1)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
                   </svg>
                 </div>
                 <div>
@@ -665,7 +665,7 @@ export default function ContactPage() {
               }}
             >
               <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
               </svg>
               Open in Maps
             </a>

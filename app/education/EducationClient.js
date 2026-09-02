@@ -167,7 +167,7 @@ function HeroDashboard() {
       {activeTab === 1 && (
         <div className="p-5 space-y-2.5 min-h-[360px]">
           <p className="text-gray-500 text-[10px] mb-4 font-mono tracking-wider uppercase">
-            // enrollment popularity — 12 programs
+            {'// enrollment popularity — 12 programs'}
           </p>
           {courseList.map((c, i) => (
             <motion.div
